@@ -1,12 +1,19 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 
+sourceCompatibility = 1.7
+group = 'com.github.viniciusffj.wiremock'
+version = '0.1'
+
 repositories {
     jcenter()
 }
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.21'
+    compile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.2.0'
+    compile group: 'com.google.guava', name: 'guava', version: '20.0'
+    compile group: 'com.github.tomakehurst', name: 'wiremock', version: '2.4.1'
 
     testCompile 'junit:junit:4.12'
 }
