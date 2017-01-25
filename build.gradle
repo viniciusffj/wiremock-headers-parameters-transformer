@@ -5,6 +5,13 @@ sourceCompatibility = 1.7
 group = 'com.github.viniciusffj.wiremock'
 version = '0.1'
 
+jar {
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
 repositories {
     jcenter()
 }
@@ -17,4 +24,10 @@ dependencies {
 
     testCompile 'io.rest-assured:rest-assured:3.0.1'
     testCompile 'junit:junit:4.12'
+}
+
+test {
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
