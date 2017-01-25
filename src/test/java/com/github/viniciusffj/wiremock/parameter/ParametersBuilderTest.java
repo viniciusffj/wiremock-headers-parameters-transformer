@@ -1,4 +1,4 @@
-package com.github.viniciusffj.wiremock;
+package com.github.viniciusffj.wiremock.parameter;
 
 import com.github.tomakehurst.wiremock.extension.Parameters;
 import org.junit.Test;
@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class ParametersBuilderTest {
 

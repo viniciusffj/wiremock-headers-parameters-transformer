@@ -1,4 +1,4 @@
-package com.github.viniciusffj.wiremock;
+package com.github.viniciusffj.wiremock.parameter;
 
 import com.github.viniciusffj.wiremock.request.BodyType;
 

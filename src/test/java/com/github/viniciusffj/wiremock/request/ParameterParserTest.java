@@ -1,7 +1,7 @@
 package com.github.viniciusffj.wiremock.request;
 
-import com.github.viniciusffj.wiremock.ParameterParser;
-import com.github.viniciusffj.wiremock.ReplaceAction;
+import com.github.viniciusffj.wiremock.parameter.ParameterParser;
+import com.github.viniciusffj.wiremock.parameter.ReplaceAction;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
