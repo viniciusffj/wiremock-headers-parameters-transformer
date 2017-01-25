@@ -1,9 +1,11 @@
-package com.github.viniciusffj.wiremock;
+package com.github.viniciusffj.wiremock.request;
 
+import com.github.viniciusffj.wiremock.ParameterParser;
+import com.github.viniciusffj.wiremock.ReplaceAction;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class ParameterParserTest {
 

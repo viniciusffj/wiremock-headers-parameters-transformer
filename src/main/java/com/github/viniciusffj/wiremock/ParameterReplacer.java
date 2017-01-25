@@ -1,5 +1,9 @@
 package com.github.viniciusffj.wiremock;
 
+import com.github.viniciusffj.wiremock.request.BodyParser;
+import com.github.viniciusffj.wiremock.request.BodyType;
+import com.github.viniciusffj.wiremock.request.FormBodyParser;
+import com.github.viniciusffj.wiremock.request.JsonBodyParser;
 import com.google.common.base.Optional;
 
 public class ParameterReplacer {

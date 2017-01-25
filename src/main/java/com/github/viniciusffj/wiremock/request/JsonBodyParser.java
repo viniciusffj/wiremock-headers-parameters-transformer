@@ -1,4 +1,4 @@
-package com.github.viniciusffj.wiremock;
+package com.github.viniciusffj.wiremock.request;
 
 import com.google.common.base.Optional;
 import com.jayway.jsonpath.JsonPath;

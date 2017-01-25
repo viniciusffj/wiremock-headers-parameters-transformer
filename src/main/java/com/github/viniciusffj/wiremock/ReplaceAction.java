@@ -1,5 +1,7 @@
 package com.github.viniciusffj.wiremock;
 
+import com.github.viniciusffj.wiremock.request.BodyType;
+
 public class ReplaceAction {
     private String query;
     private BodyType type;

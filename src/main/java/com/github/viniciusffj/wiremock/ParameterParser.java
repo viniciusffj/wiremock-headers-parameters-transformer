@@ -1,5 +1,7 @@
 package com.github.viniciusffj.wiremock;
 
+import com.github.viniciusffj.wiremock.request.BodyType;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

@@ -1,4 +1,4 @@
-package com.github.viniciusffj.wiremock;
+package com.github.viniciusffj.wiremock.request;
 
 public enum BodyType {
     JSON, FORM;
