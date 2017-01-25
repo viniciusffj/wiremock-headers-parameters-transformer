@@ -26,6 +26,7 @@ public class ParameterParserTest {
 
         assertThat(action.type(), is(BodyType.JSON));
         assertThat(action.query(), is("$.team.name"));
+        assertThat(action.original(), is("${body-type=json,query=$.team.name}"));
     }
 
     @Test
@@ -37,5 +38,19 @@ public class ParameterParserTest {
 
         assertThat(action.type(), is(BodyType.FORM));
         assertThat(action.query(), is("param"));
+        assertThat(action.original(), is("${body-type=form,query=param}"));
+    }
+
+    @Test
+    public void shouldHaveActionWhenQueryIsInTheMiddleOfAText() throws Exception {
+        String parameter = "{\"name\": \"${body-type=form,query=name}\"}";
+        ParameterParser parameterParser = new ParameterParser(parameter);
+
+        assertThat(parameterParser.hasAction(), is(true));
+        ReplaceAction action = parameterParser.action();
+
+        assertThat(action.type(), is(BodyType.FORM));
+        assertThat(action.query(), is("name"));
+        assertThat(action.original(), is("${body-type=form,query=name}"));
     }
 }

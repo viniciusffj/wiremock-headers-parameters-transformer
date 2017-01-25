@@ -6,6 +6,8 @@ import com.github.viniciusffj.wiremock.request.FormBodyParser;
 import com.github.viniciusffj.wiremock.request.JsonBodyParser;
 import com.google.common.base.Optional;
 
+import java.util.regex.Pattern;
+
 public class ParameterReplacer {
     private final JsonBodyParser jsonBodyParser;
     private final FormBodyParser formBodyParser;
@@ -21,7 +23,10 @@ public class ParameterReplacer {
         if (parameterParser.hasAction()) {
             ReplaceAction action = parameterParser.action();
             Optional<String> requestParameter = bodyParser(action.type()).getValue(action.query());
-            return requestParameter.or(parameter);
+
+            if (requestParameter.isPresent()) {
+                return parameter.replaceAll(Pattern.quote(action.original()), requestParameter.get());
+            }
         }
 
         return parameter;

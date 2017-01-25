@@ -30,6 +30,14 @@ public class ParameterReplacerTest {
     }
 
     @Test
+    public void shouldReplaceParameterOnlyWhereRequestParameterIsNecessary() throws Exception {
+        String parameter = "{\"id\": \"${body-type=json,query=$.id}\"}";
+        String newValue = parameterReplacer.newValue(parameter);
+
+        assertThat(newValue, is("{\"id\": \"123\"}"));
+    }
+
+    @Test
     public void shouldNotReplaceParameterWhenBodyHasNoValue() throws Exception {
         String newValue = parameterReplacer.newValue("${body-type=json,query=$.name}");
 

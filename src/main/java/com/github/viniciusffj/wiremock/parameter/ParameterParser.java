@@ -6,11 +6,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ParameterParser {
+    private static final int ORIGINAL_CAPTURE_GROUP = 0;
     private static final int TYPE_CAPTURE_GROUP = 1;
     private static final int QUERY_CAPTURE_GROUP = 2;
     private String parameter;
 
-    private static Pattern REPLACE_PATTERN = Pattern.compile("\\$\\{body-type=(.*),query=(.*)}");
+    private static Pattern REPLACE_PATTERN = Pattern.compile("\\$\\{body-type=(.*),query=([^}]+)}");
     private Matcher matcher;
 
 
@@ -25,7 +26,8 @@ public class ParameterParser {
 
     public ReplaceAction action() {
         String query = this.matcher.group(QUERY_CAPTURE_GROUP);
-        return new ReplaceAction(getType(), query);
+        String original = this.matcher.group(ORIGINAL_CAPTURE_GROUP);
+        return new ReplaceAction(getType(), query, original);
     }
 
     private BodyType getType() {
