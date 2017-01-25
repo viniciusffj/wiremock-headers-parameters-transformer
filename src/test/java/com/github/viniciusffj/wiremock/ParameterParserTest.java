@@ -25,4 +25,15 @@ public class ParameterParserTest {
         assertThat(action.type(), is(BodyType.JSON));
         assertThat(action.query(), is("$.team.name"));
     }
+
+    @Test
+    public void shouldHaveActionWhenUsingFormBody() throws Exception {
+        ParameterParser parameterParser = new ParameterParser("${body-type=form,query=param}");
+
+        assertThat(parameterParser.hasAction(), is(true));
+        ReplaceAction action = parameterParser.action();
+
+        assertThat(action.type(), is(BodyType.FORM));
+        assertThat(action.query(), is("param"));
+    }
 }

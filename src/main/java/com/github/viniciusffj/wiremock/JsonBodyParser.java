@@ -3,7 +3,7 @@ package com.github.viniciusffj.wiremock;
 import com.google.common.base.Optional;
 import com.jayway.jsonpath.JsonPath;
 
-public class JsonBodyParser {
+public class JsonBodyParser implements BodyParser {
     private String body;
 
     public JsonBodyParser(String body) {
@@ -13,6 +13,7 @@ public class JsonBodyParser {
         }
     }
 
+    @Override
     public Optional<String> getValue(String path) {
         Object value;
         try {

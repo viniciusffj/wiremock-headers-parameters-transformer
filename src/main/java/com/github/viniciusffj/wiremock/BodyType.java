@@ -1,7 +1,7 @@
 package com.github.viniciusffj.wiremock;
 
 public enum BodyType {
-    JSON;
+    JSON, FORM;
 
     public static BodyType fromString(String type) {
         String name = type ==  null ? "" : type.toUpperCase();

@@ -35,4 +35,13 @@ public class ParameterReplacerTest {
 
         assertThat(newValue, is("${body-type=json,query=$.name}"));
     }
+
+    @Test
+    public void shouldReplaceParameterForFormBody() throws Exception {
+        ParameterReplacer parameterReplacer = new ParameterReplacer("id=123");
+
+        String newValue = parameterReplacer.newValue("${body-type=form,query=id}");
+
+        assertThat(newValue, is("123"));
+    }
 }

@@ -5,13 +5,14 @@ import com.google.common.base.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FormBodyParser {
+public class FormBodyParser implements BodyParser {
     private String body;
 
     public FormBodyParser(String body) {
         this.body = body;
     }
 
+    @Override
     public Optional<String> getValue(String parameter) {
         Pattern pattern = Pattern.compile(String.format("%s=([^=&]*)", parameter));
 
