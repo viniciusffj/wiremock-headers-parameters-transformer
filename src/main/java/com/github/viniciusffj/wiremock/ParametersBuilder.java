@@ -5,10 +5,10 @@ import com.google.common.base.Optional;
 
 import java.util.Map;
 
-public class ParametersReplacer {
+public class ParametersBuilder {
     private Parameters parameters;
 
-    public ParametersReplacer(Parameters parameters) {
+    public ParametersBuilder(Parameters parameters) {
         this.parameters = parameters;
     }
 

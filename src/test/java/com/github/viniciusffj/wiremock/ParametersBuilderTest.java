@@ -9,14 +9,14 @@ import java.util.Map;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-public class ParametersReplacerTest {
+public class ParametersBuilderTest {
 
     @Test
     public void shouldReplaceFirstLevelParameters() throws Exception {
         Parameters parameters = Parameters.one("url", "${body-type=json,query=$.url}");
-        ParametersReplacer parametersReplacer = new ParametersReplacer(parameters);
+        ParametersBuilder parametersBuilder = new ParametersBuilder(parameters);
 
-        Parameters transformedParameters = parametersReplacer.fromBody("{\"url\": \"http://test.com\"}");
+        Parameters transformedParameters = parametersBuilder.fromBody("{\"url\": \"http://test.com\"}");
 
         assertThat(transformedParameters.getString("url"), is("http://test.com"));
     }
@@ -31,9 +31,9 @@ public class ParametersReplacerTest {
             put("request", requestMap);
         }};
         Parameters parameters = Parameters.from(map);
-        ParametersReplacer parametersReplacer = new ParametersReplacer(parameters);
+        ParametersBuilder parametersBuilder = new ParametersBuilder(parameters);
 
-        Parameters transformedParameters = parametersReplacer.fromBody("{\"url\": \"http://test.com\"}");
+        Parameters transformedParameters = parametersBuilder.fromBody("{\"url\": \"http://test.com\"}");
 
         Map request = (Map) transformedParameters.get("request");
         assertThat((String) request.get("url"), is("http://test.com"));
