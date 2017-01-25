@@ -1,7 +1,6 @@
 package com.github.viniciusffj.wiremock;
 
 import com.github.tomakehurst.wiremock.extension.Parameters;
-import com.google.common.base.Optional;
 
 import java.util.Map;
 
@@ -14,40 +13,29 @@ public class ParametersBuilder {
 
     public Parameters fromBody(String body) {
         Parameters parameters = (Parameters) this.parameters.clone();
+        ParameterReplacer parameterReplacer = new ParameterReplacer(body);
 
-        fromBody(body, parameters);
+        fromBody(parameters, parameterReplacer);
 
         return parameters;
     }
 
-    private void fromBody(String body, Map<String, Object> parameters) {
+    private void fromBody(Map<String, Object> parameters, ParameterReplacer parameterReplacer) {
         for (String key: parameters.keySet()) {
             Object value = parameters.get(key);
 
             if (isAMap(value)) {
-                fromBody(body, (Map<String, Object>) value);
+                fromBody((Map<String, Object>) value, parameterReplacer);
             }
 
             if (isAString(value)) {
-                parameters.put(key, newValue(body, (String) value));
+                parameters.put(key, parameterReplacer.newValue((String) value));
             }
         }
     }
 
     private boolean isAMap(Object value) {
         return value instanceof Map;
-    }
-
-    private String newValue(String body, String value) {
-        ParameterParser parameterParser = new ParameterParser(value);
-
-        if (parameterParser.hasAction()) {
-            String query = parameterParser.action().query();
-            Optional<String> requestParameter = new JsonBodyParser(body).getValue(query);
-            return requestParameter.or(value);
-        }
-
-        return value;
     }
 
     private boolean isAString(Object value) {
