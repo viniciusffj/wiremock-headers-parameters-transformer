@@ -1,0 +1,22 @@
+language: java
+jdk:
+- oraclejdk8
+- oraclejdk7
+before_cache:
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+script: "./gradlew test"
+deploy:
+  provider: releases
+  api_key:
+    secure: Kdq9MwCGuBSVbsdocEUlPfbK8Tbgc3wshfF1H+t6eoOeZT816hO32f8TFWpqZfgM72DcNxT3vRfum63dLfzG/nVYC4rrlnIwVWrl/LjEjbLIrWbHHq8rnV4DpD9ljn3fD2QXsy/ptiWI+5uGawSBiFUMiIKbEnOo8QvLh0e9hf1ir30BGNHqPAfYLiWjbeBXbxaGCrpqRN0/CB0s4o77omyyPsFmJBgl0stxM/SlJ5KNxd9UXPcmdjbJ5BYjlBrV7R6lDeAAvJlvH0FBwN7XhgvAUC+/FYJ4Ra4S//RsMS2BrnKhiRYSqPegxoLNSJngeWA/x1niFTLHEkDiuGKoW97LWT6hJkYSvH/8Hvn5sbgS8XedF+Q9Ra41RItM4p+4Ce3YLxqUQ30cNUgB5pHPqzanzodIi/hF2mjWS12rVjZM/BkjO/fxFK43FZdD7LFQkeLW+UEsG3LTFfhRu0Wm/1whJFVdWSCjPpzf/b0FXLaIy7V/C9sL+P5Y6rnbCXb6dCYxVI3iSuOs9RnSAncsVqdVXWVHeAyQeUj9qvQnAWtbi+dR0sI/PGrwYY3YqEjBauR1LaUNZJ3mhPNDuhg9Y/S02ATIi+oNDhXM1smYnL8PM4XVEjFX5fooeOytzA/BYUshqotjFFmt+QfdOwfoxm1O8OsoZTpbIyZpCwAmsVg=
+  file_glob: true
+  file: "build/libs/wiremock-parameter-transformer*.jar"
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: viniciusffj/wiremock-headers-parameters-transformer
