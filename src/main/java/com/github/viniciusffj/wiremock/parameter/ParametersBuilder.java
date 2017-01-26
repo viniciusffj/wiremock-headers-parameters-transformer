@@ -12,26 +12,29 @@ public class ParametersBuilder {
     }
 
     public Parameters fromBody(String body) {
-        Parameters parameters = (Parameters) this.parameters.clone();
         ParameterReplacer parameterReplacer = new ParameterReplacer(body);
 
-        fromBody(parameters, parameterReplacer);
-
-        return parameters;
+        return fromBody(this.parameters, parameterReplacer);
     }
 
-    private void fromBody(Map<String, Object> parameters, ParameterReplacer parameterReplacer) {
+    private Parameters fromBody(Map<String, Object> parameters, ParameterReplacer parameterReplacer) {
+        Parameters newParameters = new Parameters();
+
         for (String key: parameters.keySet()) {
             Object value = parameters.get(key);
 
             if (isAMap(value)) {
-                fromBody((Map<String, Object>) value, parameterReplacer);
+                value = fromBody((Map<String, Object>) value, parameterReplacer);
             }
 
             if (isAString(value)) {
-                parameters.put(key, parameterReplacer.newValue((String) value));
+                value = parameterReplacer.newValue((String) value);
             }
+
+            newParameters.put(key, value);
         }
+
+        return newParameters;
     }
 
     private boolean isAMap(Object value) {

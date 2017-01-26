@@ -70,5 +70,17 @@ public class ParametersTransformerIntegrationTest {
 
         assertThat(dummyExtension.getParameter("name"), is("Pablo"));
         assertThat(dummyExtension.getParameter("id"), is("123"));
+
+        RestAssured
+                .given()
+                    .body("id=1&name=Juan")
+                .when()
+                    .post("http://localhost:8001/parameters-transformer")
+                .then()
+                    .assertThat()
+                    .statusCode(200);
+
+        assertThat(dummyExtension.getParameter("name"), is("Juan"));
+        assertThat(dummyExtension.getParameter("id"), is("123"));
     }
 }

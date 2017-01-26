@@ -38,5 +38,7 @@ public class ParametersBuilderTest {
 
         Map request = (Map) transformedParameters.get("request");
         assertThat((String) request.get("url"), is("http://test.com"));
+        Map request2 = (Map) parameters.get("request");
+        assertThat((String) request2.get("url"), is("${body-type=json,query=$.url}"));
     }
 }

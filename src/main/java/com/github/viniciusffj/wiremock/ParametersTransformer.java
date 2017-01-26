@@ -9,17 +9,30 @@ import com.github.tomakehurst.wiremock.http.ResponseDefinition;
 import com.github.viniciusffj.wiremock.parameter.ParametersBuilder;
 
 public class ParametersTransformer extends ResponseDefinitionTransformer {
+
+    /*
+    * We need to to this to always use the original transformer parameters value.
+    * This is necessary due to a behavior in Wiremock[1], which changes the original
+    * state of response definition
+    *
+    * [1] https://github.com/tomakehurst/wiremock/issues/592
+    * */
+    private static Parameters originalParams;
+
     @Override
     public ResponseDefinition transform(Request request,
                                         ResponseDefinition responseDefinition,
                                         FileSource files,
                                         Parameters parameters) {
+        if (originalParams == null) {
+            originalParams = (Parameters) parameters.clone();
+        }
 
         ResponseDefinitionBuilder builder = ResponseDefinitionBuilder
                 .like(responseDefinition)
                 .but();
 
-        return updateTransformerParameters(request, parameters, builder)
+        return updateTransformerParameters(request, originalParams, builder)
                 .build();
     }
 
