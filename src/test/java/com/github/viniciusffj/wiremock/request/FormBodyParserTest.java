@@ -13,7 +13,7 @@ public class FormBodyParserTest {
 
     @Before
     public void setUp() throws Exception {
-        body = new FormBodyParser("id=123&name=Paul");
+        body = new FormBodyParser("id=123&name=Paul&url=http%3A%2F%2Flocalhost%3A8080%2F");
     }
 
     @Test
@@ -22,6 +22,14 @@ public class FormBodyParserTest {
 
         assertThat(value.isPresent(), is(true));
         assertThat(value.get(), is("123"));
+    }
+
+    @Test
+    public void shouldGetParameterInUtf8IfPresent() throws Exception {
+        Optional<String> value = body.getValue("url");
+
+        assertThat(value.isPresent(), is(true));
+        assertThat(value.get(), is("http://localhost:8080/"));
     }
 
     @Test
