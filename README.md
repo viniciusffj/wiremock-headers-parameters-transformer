@@ -19,7 +19,7 @@ Download the [extension jar](https://github.com/viniciusffj/wiremock-headers-par
 
 Start wiremock by running:
 ```bash
-java -cp "wiremock-http-requests-maker.jar:wiremock-standalone.jar" com.github.tomakehurst.wiremock.standalone.WireMockServerRunner --verbose --extensions 'com.github.viniciusffj.wiremock.ParametersTransformer,com.github.viniciusffj.wiremock.HeadersTransformer'
+java -cp "wiremock-parameter-transformer.jar:wiremock-standalone.jar" com.github.tomakehurst.wiremock.standalone.WireMockServerRunner --verbose --extensions 'com.github.viniciusffj.wiremock.ParametersTransformer,com.github.viniciusffj.wiremock.HeadersTransformer'
 ```
 
 Please, read more about running wiremock as a standalone process in [their documentation](http://wiremock.org/docs/running-standalone/).
